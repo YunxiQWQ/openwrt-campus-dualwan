@@ -1,0 +1,26 @@
+# Fictional, non-working node. This is not a subscription.
+mixed-port: 7893
+allow-lan: false
+bind-address: 127.0.0.1
+external-controller: 127.0.0.1:9090
+hosts:
+  node.example.org: endpoint.example.org
+proxies:
+  - name: Example mobile node
+    type: anytls
+    server: node.example.org
+    port: 443
+    password: REPLACE_LOCALLY
+    sni: node.example.org
+    skip-cert-verify: false
+proxy-groups:
+  - name: Proxies
+    type: select
+    proxies: [Example mobile node]
+dns:
+  enable: true
+  listen: 127.0.0.1:7874
+  enhanced-mode: fake-ip
+  nameserver: [192.0.2.1]
+rules:
+  - MATCH,Proxies

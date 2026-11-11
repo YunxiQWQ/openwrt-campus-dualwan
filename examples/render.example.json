@@ -1,0 +1,11 @@
+{
+  "mobile_device": "wlan0",
+  "routing_mark": 6666,
+  "metadata_name_prefixes": [],
+  "direct_cidrs": ["127.0.0.0/8", "192.168.50.0/24", "192.0.2.0/24", "198.51.100.1/32"],
+  "direct_domains": ["portal.example.edu", "download.example.org"],
+  "dns": {
+    "enable": true,
+    "proxy-server-nameserver": ["192.0.2.1"]
+  }
+}

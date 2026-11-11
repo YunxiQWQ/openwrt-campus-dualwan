@@ -1,0 +1,17 @@
+{
+  "configured": false,
+  "portal_origin": "http://198.51.100.1",
+  "campus_interface": "campus",
+  "campus_device": "wlan1",
+  "username_file": "/etc/campus-dualwan/private/username",
+  "password_file": "/etc/campus-dualwan/private/password",
+  "service": "",
+  "direct_gid": null,
+  "transparent_proxy_bypass_verified": false,
+  "renew_before_cidrs": [],
+  "state_directory": "/tmp/campus-dualwan-auth",
+  "connectivity_checks": [
+    {"url": "http://www.msftconnecttest.com/connecttest.txt", "status": 200, "body": "Microsoft Connect Test"},
+    {"url": "https://www.baidu.com/", "status": 200}
+  ]
+}

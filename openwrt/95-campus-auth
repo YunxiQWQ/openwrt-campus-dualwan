@@ -1,0 +1,12 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-only
+# Source the validated logical interface name from the private JSON configuration.
+case "$ACTION" in ifup|ifupdate) ;; *) exit 0;; esac
+config=/etc/campus-dualwan/private/auth.json
+[ -r "$config" ] || exit 0
+campus=$(ruby -rjson -e 'print JSON.parse(File.read(ARGV[0])).fetch("campus_interface")' "$config") || exit 1
+[ "$INTERFACE" = "$campus" ] || exit 0
+(
+    sleep 3
+    ruby /usr/libexec/campus-dualwan/bin/campus-auth.rb "$config" --run 2>&1 | logger -t campus-auth
+) </dev/null >/dev/null 2>&1 &

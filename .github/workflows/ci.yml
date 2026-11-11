@@ -1,0 +1,25 @@
+name: Validate public source
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Install test tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ruby ruby-json curl shellcheck
+      - name: Ruby unit and workflow tests
+        run: ruby tests/run.rb
+      - name: Real curl against a loopback-only fake portal
+        run: sudo sh tests/http-netns.sh
+      - name: Shell syntax and lint
+        run: shellcheck -s sh tests/netns.sh tests/http-netns.sh openwrt/95-campus-auth openwrt/97-mobile-recovery openwrt/openclash-overwrite.example.sh
+      - name: Isolated kernel routing behavior
+        run: sudo sh tests/netns.sh
+      - name: Public-source scan and whitespace
+        run: |
+          python3 scripts/check_public.py
+          git diff --check

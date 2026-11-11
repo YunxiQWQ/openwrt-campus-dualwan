@@ -1,0 +1,11 @@
+{
+  "mobile_interface": "mobile",
+  "lan_interface": "lan",
+  "mobile_gateway": "192.0.2.1",
+  "mobile_cidr": "192.0.2.0/24",
+  "lan_cidrs": ["192.168.50.0/24"],
+  "node_ipv4": ["203.0.113.20"],
+  "table": 100,
+  "priority_start": 11000,
+  "routing_mark": 6666
+}

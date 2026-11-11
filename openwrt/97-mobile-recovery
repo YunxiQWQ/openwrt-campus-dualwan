@@ -1,0 +1,8 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-only
+[ "$ACTION" = ifup ] || exit 0
+[ -r /etc/campus-dualwan/private/recovery.json ] || exit 0
+(
+    ruby /usr/libexec/campus-dualwan/bin/recover-mobile.rb \
+        /etc/campus-dualwan/private/recovery.json 2>&1 | logger -t mobile-recovery
+) </dev/null >/dev/null 2>&1 &

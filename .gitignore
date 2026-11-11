@@ -1,0 +1,13 @@
+# Runtime inputs and generated configuration must stay outside version control.
+/private/
+/generated/
+/runtime/
+*.pcap
+*.pcapng
+*.log
+*.sqlite*
+*.pem
+*.key
+.env*
+!*.example
+__pycache__/
